@@ -23,7 +23,7 @@ Steps:
  2. Add medication with a specific time and day.
  3. Set the system time to match the scheduled time for the medication.
  4. When the reminder is triggered, do not confirm the medication.
- 5. Wait for the system to send another reminder after a set interval.
+ 5. Wait for the system to send another reminder after a set time.
 Result: The system should continue sending reminders at the specified time until the user confirms that the medication has been taken.
 
 Test Case 4: Check multiple reminders for multiple users
