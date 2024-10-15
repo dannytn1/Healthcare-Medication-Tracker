@@ -1,4 +1,22 @@
-// add usernames
-// making sure that the username is available
-// being able to add multiple users if needed
-// possibly add the age?
+Test Case 1: Add a new user
+Objective: Verify that the user can be added successfully 
+Steps:
+ 1. Run application
+ 2. Enter a unique username when asked to
+ 3. Confirm that the user is added to the list of users
+Result: New username is added and a success message will be shown that the user is added. 
+
+Test Case 2: Add a duplicate user
+Objective: Making sure duplicate usernames cannot be added.
+Steps:
+ 1. Run application
+ 2. Adding a username
+ 3. Try adding the same username again
+Result: An error message will pop up saying that the username is taken.
+
+Test Case 3: Add multiple users
+Objective: Verify that multiple usernames can be added with no problems.
+Steps:
+ 1. Run application
+ 2. Add more unique usernames
+Result: All usernames are successfully added and listed.
