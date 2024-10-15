@@ -1,0 +1,2 @@
+// The system should check the current time and day and send reminders if it's time for the user to take their medication.
+// Users can confirm whether they took their medication, and the system will keep sending reminders until they do.
