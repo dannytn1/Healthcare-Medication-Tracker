@@ -1,3 +1,4 @@
 // add usernames
 // making sure that the username is available
 // being able to add multiple users if needed
+// possibly add the age?
