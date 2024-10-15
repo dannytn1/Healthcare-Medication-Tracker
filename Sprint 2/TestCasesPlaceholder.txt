@@ -1,0 +1,2 @@
+// Medication data should be associated with each user.
+// The system should allow users to input medicine names, times, and days for taking them.
