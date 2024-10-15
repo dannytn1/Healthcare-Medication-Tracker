@@ -1,2 +1,45 @@
 // Medication data should be associated with each user.
 // The system should allow users to input medicine names, times, and days for taking them.
+/*
+Test Case 1: Add medication for a user
+Objective: Verify that a user can add medication details (name, time, day).
+Steps:
+1. run the application 
+2. input medication name, time, and day
+3. confirm the details are correctly saved and displayed for the user
+
+test Case 2: Add Multiple medications for a single user
+Objective: Ensure that multiple medications can be added with no issues
+Steps:
+1. add a new user 
+2. add two different medications for the same user with different names, times, and days
+3. Verify that the medication list is correctly listed 
+
+Test case 3: Add medication for multiple users 
+Objective: verify that different users can have their own lists
+Steps:
+1. Add multiple users
+2. For each user input a different type of medication with different properties
+3. Verify that each user has their own 
+
+Test case 4: Invalid time input 
+Objective: Ensure that the system handles invalid time input
+Steps: 
+1. Add a new user 
+2. Try to input medication with an invalid time (e.g., 25:00 pm or random text)
+3. Check the systems' response time and display an error message and invalid time 
+
+Test case 5: invalid day input for medication
+Objective: Ensure that the system handles invalid dates
+Steps: 
+1. Add a new user
+2. Try to input medication with an invalid day
+3. Check the system response and make sure it displays an error message to prompt the user to enter the correct information
+
+Test case 6: View the medication list for the user
+Objective: Ensure that a user can view their full medication schedule
+Steps:
+1. Add a new user
+2. add medication details (name, day, time
+3. view the medication schedule for the user. expected result: the user should be able to view all medications 
+*/
