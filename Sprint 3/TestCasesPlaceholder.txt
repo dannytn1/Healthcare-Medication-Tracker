@@ -1,2 +1,62 @@
-// The system should check the current time and day and send reminders if it's time for the user to take their medication.
-// Users can confirm whether they took their medication, and the system will keep sending reminders until they do.
+Test Case 1: Send reminder at the correct time
+Objective: Confirm that the system sends a reminder at the scheduled time and day.
+Steps:
+ 1. Add a new user.
+ 2. Add medication with a specific time and day.
+ 3. Set the system time to match the scheduled medication time.
+ 4. Wait for the reminder.
+Result: The system sends a reminder at the correct time and day, alerting the user to confirm whether they took the medication.
+
+Test Case 2: Confirm medication has been taken
+Objective: Ensure that the user can confirm they have taken their medication, and reminders stop afterward.
+Steps:
+ 1. Add a new user.
+ 2. Add medication with a specific time and day.
+ 3. Set the system time to match the scheduled time for the medication.
+ 4. When the reminder is triggered, confirm that the medication has been taken.
+Result: Once the user confirms they’ve taken the medication, the system stops sending reminders for that medication.
+
+Test Case 3: Continue sending reminders until confirmation
+Objective: Ensure that the system continues to send reminders if the user does not confirm they have taken the medication.
+Steps:
+ 1. Add a new user.
+ 2. Add medication with a specific time and day.
+ 3. Set the system time to match the scheduled time for the medication.
+ 4. When the reminder is triggered, do not confirm the medication.
+ 5. Wait for the system to send another reminder after a set interval.
+Result: The system should continue sending reminders at the specified time until the user confirms that the medication has been taken.
+
+Test Case 4: Check multiple reminders for multiple users
+Objective: Verify that reminders are sent correctly for multiple users with different medication schedules.
+Steps:
+ 1. Add two or more users.
+ 2. Assign different medications to each user with different times and days.
+ 3. Set the system time to match the scheduled times for the medications.
+ 4. Wait for reminders to be sent for each user.
+Result: Reminders should be sent at the correct times for each user, with no overlap between users.
+
+Test Case 5: Reminder after missed medication
+Objective: Verify that the system continues to remind the user after they have missed their scheduled medication time.
+Steps:
+  1. Add a new user.
+  2. Add medication with a specific time.
+  3. Set the system time to a point after the scheduled time (e.g., 10 minutes late).
+  4. Wait for the reminder.
+Result: The system should send a reminder even if the medication time has passed, indicating that the user missed the scheduled time.
+
+Test Case 6: View upcoming reminders for a user
+Objective: Verify that a user can view all their upcoming reminders and scheduled medications.
+Steps:
+ 1. Add a new user.
+ 2. Add multiple medications with different times and days.
+ 3. View the user’s upcoming medication reminders.
+Result: The system should display a list of upcoming medication times and days for the user.
+
+Test Case 7: Handle invalid time or day input for reminders
+Objective: Ensure that the system handles invalid time or day input when setting reminders.
+Steps:
+ 1. Add a new user.
+ 2. Try to add medication with invalid time or day inputs (e.g., "25:00 PM" or "FunDay").
+ 3. Check the system’s response when trying to set the reminder.
+Result: The system should display an error message indicating invalid input and prevent the medication from being added until a valid time and day are provided.
+
