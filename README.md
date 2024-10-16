@@ -1,4 +1,4 @@
-**Group Members**
+**Group #12 Members**
 - Danny Nguyen
 - Fernando Ramirez
 - Jacob Stephen
