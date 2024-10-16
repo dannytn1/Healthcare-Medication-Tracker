@@ -1,4 +1,4 @@
-My group members are:
+**Group Members**
 - Danny Nguyen
 - Fernando Ramirez
 - Jacob Stephen
