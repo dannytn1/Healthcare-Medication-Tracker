@@ -7,7 +7,7 @@
 - Pearon Peuat
 
 
-Project Description:
+**Project Description**
 
 The Medication Adherence System (MAS) is a tool designed to help patients stay on track with their medication schedule. It sends timely reminders and 
 allows patients to log whether they have taken or missed their medication. Healthcare providers, including doctors, can review patient records to 
