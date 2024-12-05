@@ -1,0 +1,121 @@
+import datetime
+import time
+from threading import Thread
+
+
+class MedicationReminder:
+    def __init__(self):
+        self.users = {}
+
+    def add_user(self, user_name):
+        if user_name not in self.users:
+            self.users[user_name] = []
+            print(f"User '{user_name}' added successfully.")
+        else:
+            print(f"User '{user_name}' already exists.")
+
+    def add_medication(self, user_name, medication_name, time_str, day):
+        if user_name not in self.users:
+            print(f"User '{user_name}' does not exist. Please add the user first.")
+            return
+
+        try:
+            medication_time = datetime.datetime.strptime(time_str, "%I:%M %p").time()
+            if day not in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]:
+                raise ValueError("Invalid day.")
+            self.users[user_name].append({
+                "medication": medication_name,
+                "time": medication_time,
+                "day": day,
+                "confirmed": False
+            })
+            print(f"Medication '{medication_name}' added for {user_name}.")
+        except ValueError as e:
+            print(f"Invalid input: {e}")
+
+    def send_reminders(self):
+        while True:
+            current_time = datetime.datetime.now()
+            current_day = current_time.strftime("%A")
+            for user, medications in self.users.items():
+                for med in medications:
+                    if (
+                            med["day"] == current_day
+                            and med["time"].hour == current_time.hour
+                            and med["time"].minute == current_time.minute
+                            and not med["confirmed"]
+                    ):
+                        print(f"Reminder for {user}: Take your medication '{med['medication']}' now!")
+            time.sleep(60)
+
+    def confirm_medication(self, user_name, medication_name):
+        if user_name not in self.users:
+            print(f"User '{user_name}' does not exist.")
+            return
+
+        for med in self.users[user_name]:
+            if med["medication"] == medication_name and not med["confirmed"]:
+                med["confirmed"] = True
+                print(f"Medication '{medication_name}' for {user_name} confirmed.")
+                return
+
+        print(f"No unconfirmed medication named '{medication_name}' found for {user_name}.")
+
+    def view_upcoming_reminders(self, user_name):
+        if user_name not in self.users:
+            print(f"User '{user_name}' does not exist.")
+            return
+
+        print(f"Upcoming reminders for {user_name}:")
+        for med in self.users[user_name]:
+            print(f" - {med['medication']} on {med['day']} at {med['time']} (Confirmed: {med['confirmed']})")
+
+
+def main():
+    reminder_system = MedicationReminder()
+
+    # Run reminders in a background thread
+    reminder_thread = Thread(target=reminder_system.send_reminders)
+    reminder_thread.daemon = True
+    reminder_thread.start()
+
+    print("Welcome to the Medication Reminder System!")
+    while True:
+        print("\nOptions:")
+        print("1. Add User")
+        print("2. Add Medication")
+        print("3. View Upcoming Reminders")
+        print("4. Confirm Medication")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            user_name = input("Enter user name: ")
+            reminder_system.add_user(user_name)
+
+        elif choice == "2":
+            user_name = input("Enter user name: ")
+            medication_name = input("Enter medication name: ")
+            time_str = input("Enter time (e.g., 07:30 AM): ")
+            day = input("Enter day (e.g., Monday): ")
+            reminder_system.add_medication(user_name, medication_name, time_str, day)
+
+        elif choice == "3":
+            user_name = input("Enter user name: ")
+            reminder_system.view_upcoming_reminders(user_name)
+
+        elif choice == "4":
+            user_name = input("Enter user name: ")
+            medication_name = input("Enter medication name: ")
+            reminder_system.confirm_medication(user_name, medication_name)
+
+        elif choice == "5":
+            print("Exiting... Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
