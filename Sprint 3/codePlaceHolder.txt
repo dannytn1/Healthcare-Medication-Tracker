@@ -1,1 +1,88 @@
+import time
+from datetime import datetime, timedelta
+
+class MedicationReminderSystem:
+    def __init__(self):
+        self.users_medications = {}
+        self.reminder_log = []
+
+    def add_user(self, user_id):
+        if user_id not in self.users_medications:
+            self.users_medications[user_id] = []
+
+    def add_medication(self, user_id, name, day, time):
+        if user_id not in self.users_medications:
+            print(f"No user with ID {user_id}.")
+            return False
+        
+        if not self.validate_time(time):
+            print("Invalid time format. Please use HH:MM (24-hour format).")
+            return False
+
+        if not self.validate_day(day):
+            print("Invalid day. Please use a weekday (Monday to Sunday).")
+            return False
+
+        medication = {
+            "name": name,
+            "day": day,
+            "time": time,
+            "confirmed": False
+        }
+        self.users_medications[user_id].append(medication)
+        print("Medication added successfully.")
+        return True
+
+    def validate_time(self, time):
+        try:
+            hours, minutes = map(int, time.split(':'))
+            return 0 <= hours < 24 and 0 <= minutes < 60
+        except ValueError:
+            return False
+
+    def validate_day(self, day):
+        valid_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        return day in valid_days
+
+    def simulate_time_passing(self, user_id, target_time):
+        """ Simulates the time passing until the target time to trigger reminders. """
+        current_time = datetime.now()
+        reminder_time = datetime.combine(current_time.date(), datetime.strptime(target_time, '%H:%M').time())
+        if current_time > reminder_time:
+            reminder_time += timedelta(days=1)
+        delay = (reminder_time - current_time).total_seconds()
+        print(f"Waiting for {delay} seconds to trigger reminder.")
+        time.sleep(delay)
+        self.send_reminder(user_id)
+
+    def send_reminder(self, user_id):
+        for medication in self.users_medications[user_id]:
+            if not medication['confirmed']:
+                print(f"Reminder: It's time to take your {medication['name']} for {medication['day']} at {medication['time']}.")
+                self.reminder_log.append(f"Sent reminder for {medication['name']}.")
+
+    def confirm_medication(self, user_id, medication_name):
+        for medication in self.users_medications[user_id]:
+            if medication['name'] == medication_name:
+                medication['confirmed'] = True
+                print(f"{medication_name} confirmed taken.")
+                return True
+        print("Medication not found.")
+        return False
+
+    def display_upcoming_reminders(self, user_id):
+        print("Upcoming Medications:")
+        for medication in self.users_medications[user_id]:
+            if not medication['confirmed']:
+                print(f"{medication['name']} on {medication['day']} at {medication['time']}")
+
+# Create instance of the system
+system = MedicationReminderSystem()
+
+# Test Cases
+system.add_user("user1")
+system.add_medication("user1", "Aspirin", "Monday", "09:00")
+system.simulate_time_passing("user1", "09:00")  # Test Case 1
+system.confirm_medication("user1", "Aspirin")   # Test Case 2
+system.display_upcoming_reminders("user1")      # Test Case 6
 
